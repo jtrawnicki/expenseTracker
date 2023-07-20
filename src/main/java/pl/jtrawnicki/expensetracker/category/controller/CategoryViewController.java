@@ -32,6 +32,7 @@ public class CategoryViewController {
     public String singleView(@PathVariable UUID id, Model model) {
         model.addAttribute("expenses", expenseService.getExpenses(id));
         model.addAttribute("category", categoryService.getCategory(id));
+        model.addAttribute("expense", expenseService.getExpenses(id));
 
         return "category/single";
     }
