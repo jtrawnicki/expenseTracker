@@ -41,14 +41,15 @@ public class ExpenseService {
         Expense expense = new Expense();
 
         expense.setName(expenseRequest.getName());
+        expense.setValue(expenseRequest.getValue());
 
 
         Category category = categoryRepository.getReferenceById(categoryId);
 
-        category.addExpense(expense);
 
-        expenseRepository.save(expense);
         categoryRepository.save(category);
+        category.addExpense(expense);
+        expenseRepository.save(expense);
 
         return expense;
     }

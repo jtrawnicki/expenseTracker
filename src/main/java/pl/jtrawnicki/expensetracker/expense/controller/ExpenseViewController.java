@@ -11,7 +11,7 @@ import pl.jtrawnicki.expensetracker.expense.service.ExpenseService;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("categories/{category-id}/expenses")
+@RequestMapping("/categories/{category-id}/expenses")
 public class ExpenseViewController {
 
     private ExpenseService expenseService;
@@ -24,17 +24,18 @@ public class ExpenseViewController {
     }
 
     @GetMapping("/add")
-    public String addView(Model model) {
+    public String addView(@PathVariable("category-id") UUID id, Model model) {
         model.addAttribute("expense", new Expense());
+        model.addAttribute("category", categoryService.getCategory(id));
 
         return "expense/add";
     }
 
-    @PostMapping()
-    public String add(@ModelAttribute("expense") Expense expense, @PathVariable("category-id") UUID categoryId) {
+    @PostMapping
+    public String add(@PathVariable("category-id") UUID categoryId, @ModelAttribute("expense") Expense expense) {
         expenseService.createExpense(categoryId, expense);
 
-        return "redirect:/categories/{category-id}/expenses";
+        return "redirect:/categories/{category-id}";
     }
 
 }

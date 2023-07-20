@@ -55,11 +55,11 @@
                             </div>
 
 
-                            <form method="post" th:object="${expense}" action="/categories/{category-id}/expenses">
+                            <form method="post" th:action="@{'/categories/' + ${category.id} + '/expenses'}" th:object="${expense}">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="expenseName">Name</label>
-                                        <input th:field="*{name}" type="text" class="form-control" id="expenseName" placeholder="Name">
+                                        <input th:field="*{name}" type="text" class="form-control" id="expenseName" placeholder="Name"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="expenseValue">Value</label>
